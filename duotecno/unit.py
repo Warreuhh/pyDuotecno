@@ -315,6 +315,14 @@ class VirtualUnit(BaseUnit):
             return False
         return True
 
+    # ==========================================
+    async def turn_on(self) -> None:
+        """Trigger the Virtual Mood/Macro"""
+        await self.writer(f"[168,3,{self.node.address},{self.unit}]")
+
+    async def turn_off(self) -> None:
+        await self.writer(f"[168,2,{self.node.address},{self.unit}]")
+
 
 class ControlUnit(VirtualUnit):
     _unitType: int = 3
